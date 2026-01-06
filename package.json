@@ -1,0 +1,12 @@
+{
+  "name": "riftbound-digital-client",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Digital TCG client for Riftbound.",
+  "type": "module",
+  "scripts": {
+    "dev": "echo 'dev server not configured yet'",
+    "build": "echo 'build not configured yet'",
+    "test": "echo 'tests not configured yet'"
+  }
+}
