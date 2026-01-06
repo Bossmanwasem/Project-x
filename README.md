@@ -22,8 +22,22 @@ A world-class, player-first digital client for **Project X**. This repo starts w
   /utils           Shared helpers and utilities
 ```
 
-## Getting Started (placeholder)
-This repo currently defines the base structure. Tooling (build system, UI framework, and runtime) will be decided next.
+## Getting Started (Electron shell)
+This repo now includes a lightweight Electron shell so you can install and open the client on a Windows machine.
+
+### Run locally
+```bash
+npm install
+npm run dev
+```
+
+### Build a Windows installer
+```bash
+npm install
+npm run build
+```
+
+The Windows installer (`.exe`) will be generated in the `dist/` folder. Run it on a Windows machine to install and launch the client.
 
 ## Next Steps
 - Choose UI stack (e.g., React + PixiJS, Unity, or Godot).
