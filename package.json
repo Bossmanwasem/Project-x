@@ -4,10 +4,33 @@
   "private": true,
   "description": "Digital TCG client for Riftbound.",
   "type": "module",
+  "main": "src/app/main.js",
   "scripts": {
-    "dev": "echo 'dev server not configured yet'",
-    "build": "echo 'build not configured yet'",
+    "dev": "electron .",
+    "start": "electron .",
+    "build": "electron-builder",
+    "pack": "electron-builder --dir",
     "test": "echo 'tests not configured yet'",
     "pull:card-art": "node scripts/pull-card-art.mjs"
+  },
+  "devDependencies": {
+    "electron": "^31.2.1",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.projectx.client",
+    "productName": "Project X Client",
+    "files": [
+      "src/app/**",
+      "src/renderer/**",
+      "src/assets/**",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": "nsis"
+    }
   }
 }
