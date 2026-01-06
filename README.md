@@ -1,6 +1,6 @@
-# Riftbound Digital TCG Client
+# Project X Digital TCG Client
 
-A world-class, player-first digital client for **Riftbound**. This repo starts with a clean, scalable structure designed for a fast, maintainable build-out of core gameplay, UI, and live services.
+A world-class, player-first digital client for **Project X**. This repo starts with a clean, scalable structure designed for a fast, maintainable build-out of core gameplay, UI, and live services.
 
 ## Goals
 - **Fast iteration** on gameplay rules and card data.
