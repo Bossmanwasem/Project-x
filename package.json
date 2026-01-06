@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "echo 'dev server not configured yet'",
     "build": "echo 'build not configured yet'",
-    "test": "echo 'tests not configured yet'"
+    "test": "echo 'tests not configured yet'",
+    "pull:card-art": "node scripts/pull-card-art.mjs"
   }
 }
