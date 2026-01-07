@@ -1,5 +1,6 @@
 import type { EffectPermission, GameInstruction, PlayerState } from "./types";
 import { resolveInstructions, resolvePermissions } from "./rules";
+export { expandDeckSection, importPiltoverArchiveDeck } from "./deckImporter";
 
 export interface GameState {
   turn: number;
