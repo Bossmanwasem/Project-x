@@ -16,14 +16,16 @@ body {
 }
 
 .shell {
-  padding: 64px;
-  max-width: 1100px;
+  padding: 56px;
+  max-width: 1280px;
   margin: 0 auto;
+  display: grid;
+  gap: 40px;
 }
 
 .hero {
   display: grid;
-  gap: 24px;
+  gap: 16px;
 }
 
 .eyebrow {
@@ -35,48 +37,309 @@ body {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 2.6rem;
   margin: 0;
 }
 
 .subhead {
   font-size: 1.1rem;
   color: #c7d2ff;
-  max-width: 720px;
+  max-width: 760px;
   margin: 0;
 }
 
-.stage {
+.layout {
   display: grid;
-  grid-template-columns: minmax(0, 860px) minmax(0, 1fr);
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
   gap: 32px;
-  align-items: stretch;
+  align-items: start;
 }
 
-.stage-canvas {
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 18px 40px rgba(6, 12, 32, 0.55);
-  border: 1px solid rgba(52, 73, 135, 0.5);
-}
-
-.stage-meta {
-  display: grid;
-  align-content: start;
-  gap: 20px;
+.deck-manager {
   padding: 24px;
   border-radius: 20px;
-  background: rgba(20, 28, 54, 0.85);
+  background: rgba(20, 28, 54, 0.9);
   box-shadow: 0 16px 40px rgba(5, 10, 25, 0.5);
+  display: grid;
+  gap: 18px;
 }
 
-.stage-meta h2 {
+.deck-manager h2 {
   margin: 0;
 }
 
-.stage-meta ul {
-  padding-left: 20px;
-  margin: 8px 0 0;
+.deck-actions,
+.deck-assign {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.deck-input {
+  min-height: 140px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(120, 143, 214, 0.4);
+  background: rgba(8, 12, 28, 0.8);
+  color: #d7dcff;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.error {
+  margin: 0;
+  color: #fca5a5;
+}
+
+.hint {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.collections {
+  display: grid;
+  gap: 16px;
+}
+
+.collection {
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(11, 15, 30, 0.75);
+  border: 1px solid rgba(90, 108, 170, 0.35);
+}
+
+.collection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.collection-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.collection ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.deck-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+}
+
+.deck-row span {
+  display: block;
+  font-size: 0.8rem;
+  color: #9fb3ff;
+}
+
+.btn {
+  border: 1px solid rgba(90, 112, 190, 0.5);
+  background: rgba(15, 20, 40, 0.8);
+  color: #dbe4ff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: #8b9cf5;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border-color: transparent;
+  font-weight: 600;
+}
+
+.btn--ghost {
+  background: transparent;
+}
+
+.arena {
+  display: grid;
+  gap: 16px;
+}
+
+.arena h2 {
+  margin: 0;
+}
+
+.arena-boards {
+  display: grid;
+  gap: 20px;
+}
+
+.player-board {
+  background: rgba(8, 12, 28, 0.82);
+  border-radius: 18px;
+  border: 1px solid rgba(91, 112, 173, 0.4);
+  padding: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.player-board.opponent {
+  background: rgba(9, 20, 38, 0.85);
+}
+
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-header h3 {
+  margin: 0;
+}
+
+.player-header span {
+  color: #9fb3ff;
+  font-size: 0.85rem;
+}
+
+.player-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.zone-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.zone {
+  padding: 12px;
+  border-radius: 14px;
+  background: rgba(16, 23, 48, 0.8);
+  border: 1px solid rgba(88, 110, 175, 0.45);
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.zone-title {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.65rem;
+  color: #9fb3ff;
+}
+
+.battlefield {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.lane {
+  min-height: 180px;
+  border-radius: 16px;
+  border: 1px dashed rgba(107, 131, 207, 0.6);
+  display: grid;
+  place-items: center;
+  padding: 10px;
+}
+
+.lane-slot {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.hand {
+  display: grid;
+  gap: 10px;
+}
+
+.hand h4 {
+  margin: 0;
+}
+
+.hand-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  border: 1px solid rgba(148, 163, 255, 0.4);
+  border-radius: 16px;
+  background: rgba(12, 17, 35, 0.9);
+  display: grid;
+  gap: 8px;
+  padding: 10px;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(4, 10, 28, 0.5);
+}
+
+.card--compact {
+  padding: 8px;
+  font-size: 0.75rem;
+}
+
+.card-art {
+  border-radius: 12px;
+  min-height: 80px;
+  background: radial-gradient(circle at top, color-mix(in srgb, var(--card-accent) 60%, #0f172a), #0f172a 70%);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.card-info {
+  display: grid;
+  gap: 6px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.card-header h4 {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.card-cost {
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(79, 70, 229, 0.4);
+}
+
+.card-info p {
+  margin: 0;
+  color: #cbd5f5;
+  font-size: 0.75rem;
+}
+
+.card-footer {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #94a3b8;
 }
 
 .status {
@@ -95,4 +358,29 @@ h1 {
   border-radius: 999px;
   background: #2b7bff;
   font-weight: 600;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .zone-grid {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .shell {
+    padding: 32px 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .battlefield {
+    grid-template-columns: 1fr;
+  }
 }
