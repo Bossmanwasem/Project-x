@@ -4,62 +4,79 @@ const statusText = (window.projectX?.version ? `Installed · v${window.projectX.
 
 const App = () => {
   const canvasHostRef = useRef(null);
-  const pixiApp = useMemo(() => {
-    return new PIXI.Application({
-      background: "#0b0f1a",
-      width: 720,
-      height: 420,
-      antialias: true,
-    });
-  }, []);
+  const pixiApp = useMemo(() => new PIXI.Application(), []);
 
   useEffect(() => {
     const host = canvasHostRef.current;
     if (!host) return undefined;
 
-    host.appendChild(pixiApp.view);
+    let destroyed = false;
 
-    const gradient = new PIXI.Graphics();
-    gradient.beginFill(0x101a33);
-    gradient.drawRoundedRect(0, 0, pixiApp.screen.width, pixiApp.screen.height, 24);
-    gradient.endFill();
+    const setupStage = async () => {
+      await pixiApp.init({
+        background: "#0b0f1a",
+        width: 860,
+        height: 480,
+        antialias: true,
+      });
 
-    const ring = new PIXI.Graphics();
-    ring.lineStyle(6, 0x2b7bff, 0.9);
-    ring.drawCircle(pixiApp.screen.width * 0.72, pixiApp.screen.height * 0.4, 84);
+      if (destroyed) return;
 
-    const title = new PIXI.Text("Arena Preview", {
-      fill: 0xf5f7ff,
-      fontFamily: "Segoe UI, system-ui, sans-serif",
-      fontSize: 28,
-      fontWeight: "600",
-    });
-    title.position.set(36, 32);
+      host.appendChild(pixiApp.canvas);
 
-    const subtitle = new PIXI.Text("PixiJS stage bootstrapped", {
-      fill: 0x9fb3ff,
-      fontFamily: "Segoe UI, system-ui, sans-serif",
-      fontSize: 16,
-    });
-    subtitle.position.set(36, 72);
+      const gradient = new PIXI.Graphics();
+      gradient.beginFill(0x111827);
+      gradient.drawRoundedRect(0, 0, pixiApp.screen.width, pixiApp.screen.height, 28);
+      gradient.endFill();
 
-    const badge = new PIXI.Text("React + PixiJS", {
-      fill: 0x0b0f1a,
-      fontFamily: "Segoe UI, system-ui, sans-serif",
-      fontSize: 14,
-      fontWeight: "600",
-    });
-    badge.position.set(36, pixiApp.screen.height - 52);
-    badge.style.padding = 8;
+      const createZone = ({ x, y, width, height, label }) => {
+        const zone = new PIXI.Graphics();
+        zone.lineStyle(2, 0xd8d2c6, 0.7);
+        zone.beginFill(0x0b1220, 0.65);
+        zone.drawRoundedRect(x, y, width, height, 12);
+        zone.endFill();
 
-    const badgeBg = new PIXI.Graphics();
-    badgeBg.beginFill(0xf5f7ff);
-    badgeBg.drawRoundedRect(28, pixiApp.screen.height - 60, 150, 32, 999);
-    badgeBg.endFill();
+        const zoneLabel = new PIXI.Text(label, {
+          fill: 0xd8d2c6,
+          fontFamily: "Segoe UI, system-ui, sans-serif",
+          fontSize: 12,
+          letterSpacing: 2,
+          fontWeight: "600",
+        });
+        zoneLabel.anchor.set(0.5, 1);
+        zoneLabel.position.set(x + width / 2, y + height - 8);
 
-    pixiApp.stage.addChild(gradient, ring, title, subtitle, badgeBg, badge);
+        return { zone, zoneLabel };
+      };
+
+      const title = new PIXI.Text("Riftbound Battlefield Layout", {
+        fill: 0xf5f7ff,
+        fontFamily: "Segoe UI, system-ui, sans-serif",
+        fontSize: 20,
+        fontWeight: "600",
+      });
+      title.position.set(24, 18);
+
+      const zones = [
+        createZone({ x: 32, y: 56, width: 340, height: 120, label: "BATTLEFIELD" }),
+        createZone({ x: 488, y: 56, width: 340, height: 120, label: "BATTLEFIELD" }),
+        createZone({ x: 32, y: 190, width: 96, height: 112, label: "CHAMPION" }),
+        createZone({ x: 138, y: 190, width: 96, height: 112, label: "LEGEND" }),
+        createZone({ x: 244, y: 190, width: 444, height: 112, label: "BASE" }),
+        createZone({ x: 698, y: 190, width: 130, height: 112, label: "MAIN DECK" }),
+        createZone({ x: 32, y: 320, width: 130, height: 120, label: "RUNE DECK" }),
+        createZone({ x: 176, y: 320, width: 512, height: 120, label: "RUNES" }),
+        createZone({ x: 698, y: 320, width: 130, height: 120, label: "TRASH" }),
+      ];
+
+      pixiApp.stage.addChild(gradient, title);
+      zones.forEach(({ zone, zoneLabel }) => pixiApp.stage.addChild(zone, zoneLabel));
+    };
+
+    setupStage();
 
     return () => {
+      destroyed = true;
       pixiApp.destroy(true, { children: true });
     };
   }, [pixiApp]);
@@ -71,11 +88,11 @@ const App = () => {
       "section",
       { className: "hero" },
       React.createElement("p", { className: "eyebrow" }, "Project X Digital Client"),
-      React.createElement("h1", null, "React + PixiJS scaffold is live."),
+      React.createElement("h1", null, "Battlefield zones are live."),
       React.createElement(
         "p",
         { className: "subhead" },
-        "This renderer now boots a React shell and mounts a PixiJS stage. Use this as the entry point for gameplay screens, overlays, and HUD elements."
+        "The PixiJS stage now renders the full TCG battlefield layout for a single player side, including deck, base, and rune zones."
       ),
       React.createElement(
         "div",
@@ -84,13 +101,13 @@ const App = () => {
         React.createElement(
           "div",
           { className: "stage-meta" },
-          React.createElement("h2", null, "Scaffold checklist"),
+          React.createElement("h2", null, "Battlefield zones"),
           React.createElement(
             "ul",
             null,
-            React.createElement("li", null, "React renderer bootstrapped."),
-            React.createElement("li", null, "PixiJS stage mounted."),
-            React.createElement("li", null, "Ready for UI composition.")
+            React.createElement("li", null, "Two battlefield lanes for units."),
+            React.createElement("li", null, "Champion, legend, and base zones."),
+            React.createElement("li", null, "Main deck, rune deck, runes, and trash.")
           ),
           React.createElement(
             "div",

@@ -48,7 +48,7 @@ h1 {
 
 .stage {
   display: grid;
-  grid-template-columns: minmax(0, 720px) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 860px) minmax(0, 1fr);
   gap: 32px;
   align-items: stretch;
 }
