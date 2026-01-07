@@ -1,4 +1,5 @@
-import type { PlayerState } from "./types";
+import type { EffectPermission, GameInstruction, PlayerState } from "./types";
+import { resolveInstructions, resolvePermissions } from "./rules";
 
 export interface GameState {
   turn: number;
@@ -13,4 +14,12 @@ export const createInitialState = (players: PlayerState[]): GameState => {
     activePlayerId: players[0]?.id ?? "",
     players: playerMap,
   };
+};
+
+export const evaluateActionPermissions = (permissions: EffectPermission[]) => {
+  return resolvePermissions(permissions);
+};
+
+export const resolveCardInstructions = (instructions: GameInstruction[]) => {
+  return resolveInstructions(instructions);
 };
